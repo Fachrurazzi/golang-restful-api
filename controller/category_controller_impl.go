@@ -14,7 +14,9 @@ type CategoryControllerImpl struct {
 }
 
 func NewCategoryController(categoryService service.CategoryService) CategoryController {
-	return &CategoryControllerImpl{CategoryService: categoryService}
+	return &CategoryControllerImpl{
+		CategoryService: categoryService,
+	}
 }
 
 func (controller *CategoryControllerImpl) Create(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
@@ -38,6 +40,7 @@ func (controller *CategoryControllerImpl) Update(writer http.ResponseWriter, req
 	categoryId := params.ByName("categoryId")
 	id, err := strconv.Atoi(categoryId)
 	helper.PanicIfError(err)
+
 	categoryUpdateRequest.Id = id
 
 	categoryResponse := controller.CategoryService.Update(request.Context(), categoryUpdateRequest)
