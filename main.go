@@ -5,6 +5,7 @@ import (
 	"github.com/Fachrurazzi/golang-restful-api/controller"
 	"github.com/Fachrurazzi/golang-restful-api/exception"
 	"github.com/Fachrurazzi/golang-restful-api/helper"
+	"github.com/Fachrurazzi/golang-restful-api/middleware"
 	"github.com/Fachrurazzi/golang-restful-api/repository"
 	"github.com/Fachrurazzi/golang-restful-api/service"
 	"github.com/go-playground/validator/v10"
@@ -31,8 +32,8 @@ func main() {
 	router.PanicHandler = exception.ErrorHandler
 
 	server := http.Server{
-		Addr:    "localhost:3000",
-		Handler: router,
+		Addr:    "localhost:3333",
+		Handler: middleware.NewAuthMiddleware(router),
 	}
 
 	err := server.ListenAndServe()
