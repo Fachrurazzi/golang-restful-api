@@ -23,7 +23,6 @@ func (repository *CategoryRepositoryImpl) Save(ctx context.Context, tx *sql.Tx, 
 	helper.PanicIfError(err)
 
 	category.Id = int(id)
-
 	return category
 }
 
@@ -53,9 +52,8 @@ func (repository *CategoryRepositoryImpl) FindById(ctx context.Context, tx *sql.
 		helper.PanicIfError(err)
 		return category, nil
 	} else {
-		return category, errors.New("Category is not found.")
+		return category, errors.New("Category is not found")
 	}
-
 }
 
 func (repository *CategoryRepositoryImpl) FindAll(ctx context.Context, tx *sql.Tx) []domain.Category {

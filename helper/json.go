@@ -7,7 +7,7 @@ import (
 
 func ReadFromRequestBody(request *http.Request, result interface{}) {
 	decoder := json.NewDecoder(request.Body)
-	err := decoder.Decode(&result)
+	err := decoder.Decode(result)
 	PanicIfError(err)
 }
 

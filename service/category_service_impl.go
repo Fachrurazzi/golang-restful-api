@@ -21,7 +21,8 @@ func NewCategoryService(categoryRepository repository.CategoryRepository, DB *sq
 	return &CategoryServiceImpl{
 		CategoryRepository: categoryRepository,
 		DB:                 DB,
-		Validate:           validate}
+		Validate:           validate,
+	}
 }
 
 func (service *CategoryServiceImpl) Create(ctx context.Context, request web.CategoryCreateRequest) web.CategoryResponse {
@@ -39,7 +40,6 @@ func (service *CategoryServiceImpl) Create(ctx context.Context, request web.Cate
 	category = service.CategoryRepository.Save(ctx, tx, category)
 
 	return helper.ToCategoryResponse(category)
-
 }
 
 func (service *CategoryServiceImpl) Update(ctx context.Context, request web.CategoryUpdateRequest) web.CategoryResponse {
@@ -56,7 +56,7 @@ func (service *CategoryServiceImpl) Update(ctx context.Context, request web.Cate
 	}
 
 	category.Name = request.Name
-	
+
 	category = service.CategoryRepository.Update(ctx, tx, category)
 
 	return helper.ToCategoryResponse(category)
@@ -96,5 +96,4 @@ func (service *CategoryServiceImpl) FindAll(ctx context.Context) []web.CategoryR
 	categories := service.CategoryRepository.FindAll(ctx, tx)
 
 	return helper.ToCategoryResponses(categories)
-
 }

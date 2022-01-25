@@ -8,6 +8,7 @@ import (
 )
 
 func ErrorHandler(writer http.ResponseWriter, request *http.Request, err interface{}) {
+
 	if notFoundError(writer, request, err) {
 		return
 	}
@@ -32,7 +33,6 @@ func validationErrors(writer http.ResponseWriter, request *http.Request, err int
 		}
 
 		helper.WriteToResponseBody(writer, webResponse)
-
 		return true
 	} else {
 		return false
@@ -52,7 +52,6 @@ func notFoundError(writer http.ResponseWriter, request *http.Request, err interf
 		}
 
 		helper.WriteToResponseBody(writer, webResponse)
-
 		return true
 	} else {
 		return false
